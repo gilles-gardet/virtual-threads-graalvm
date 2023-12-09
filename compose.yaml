@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: vtg-db
+    image: postgres:14.4
+    restart: always
+    environment:
+      POSTGRES_DB: vtg
+      POSTGRES_USER: gilles
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5555:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data/
+volumes:
+  postgres:
+    driver: local

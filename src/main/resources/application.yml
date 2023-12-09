@@ -1,0 +1,31 @@
+logging.config: classpath:logback-spring.xml
+
+server:
+  port: 8080
+  servlet.context-path: /api
+#  tomcat.threads.max: 10
+
+spring:
+  threads.virtual.enabled: true
+  docker.compose:
+    enabled: true
+    file: compose.yaml
+    profiles.active: local
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yml
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5555/vtg
+    username: gilles
+    password: password
+  jpa:
+    show-sql: true
+    database: postgresql
+    properties.hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql.init.mode: never
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      indent_output: true
